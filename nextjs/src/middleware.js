@@ -13,12 +13,18 @@ export const middleware = async (request) => {
     }
 
     // Nếu có token, xác thực token
-    if (token) {
-        const { success, user } = await getProfile(token);
-        // console.log("Profile fetched:", { success, user });
-        // Nếu token không hợp lệ, chuyển hướng về trang login
-        if (!success) {
-            return NextResponse.redirect(new URL("/login", request.url));
+    if (pathname==="/login") {
+        if (token) {
+            const { success, user } = await getProfile(token);
+            // console.log("Profile fetched:", { success, user });
+            // Nếu token không hợp lệ, chuyển hướng về trang login
+            if (!success) {
+                return NextResponse.redirect(new URL("/login", request.url));
+            }
+            else if (success) {
+                return NextResponse.redirect(new URL("/", request.url));
+
+            }
         }
     }
 

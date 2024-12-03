@@ -1,4 +1,43 @@
+"use client";
+
+import React from "react";
+import Cookies from "js-cookie"; 
+import { useRouter } from "next/navigation"; // Sử dụng useRouter để chuyển hướng
+import axios from "axios";
+
 export const Header = () => {
+    const router = useRouter();
+
+    const Logout = async () => {
+        const token = Cookies.get("token");
+        // console.log(token);
+        if (!token) {
+            router.push("/login");
+            return;
+        }
+
+        try {
+            // Gọi API logout
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/auth/logout", 
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Gửi token trong header
+                    },
+                }
+            );
+
+            Cookies.remove("token");
+            router.push("/login");
+
+        } catch (err) {
+            console.error("Logout failed:", err);
+            // Nếu có lỗi xảy ra, vẫn chuyển hướng về trang login
+            router.push("/login");
+        }
+    };
+
     return (
         <div>
             <header>
@@ -27,7 +66,7 @@ export const Header = () => {
                                     </a>
                                 </li>
                                 <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
+                                <li><a onClick={Logout}>Logout</a></li>
                             </ul>
                         </div>
                     </div>

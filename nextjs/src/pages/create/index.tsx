@@ -22,8 +22,8 @@ const CreateUserPage = () => {
     const onSubmitChange = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const responce = await axios.post("http://127.0.0.1:8000/api/addnew", userField);
-            console.log(responce);
+            const response = await axios.post("http://127.0.0.1:8000/api/addnew", userField);
+            console.log(response);
             window.location.href = '/';
         } catch (err) {
             console.log("Something Wrong");
