@@ -4,17 +4,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios' //npm install axios 
 import Link from "next/link";
 import { useParams } from 'next/navigation'
+import { useRouter } from 'next/router';
+import { Header } from "@/components/Header";
 
 interface User {
     id: number;
     name: string;
-    email: string;
+    email: string
 }
 
 export default function ViewUserPage() {
-    const { id } = useParams();
-
-    console.log(id);
+    const router = useRouter();
+    const { id } = router.query;
 
     const [user, setUser] = useState<User | null>(null);
 
@@ -34,24 +35,27 @@ export default function ViewUserPage() {
     }
 
     return (
-        <div className="max-w-2xl mx-auto mt-5">
-            <h1 className="text-2xl text-center mb-2">View User</h1>
-            <table className="table table-zebra">
-                <thead className="text-sm text-gray-700 uppercase bg-gray-50">
-                    <tr>
-                        <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{user?.id}</td>
-                        <td>{user?.name}</td>
-                        <td>{user?.email}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div>
+            <Header />
+            <div className="max-w-2xl mx-auto mt-5">
+                <h1 className="text-2xl text-center mb-2">View User</h1>
+                <table className="table table-zebra">
+                    <thead className="text-sm text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{user?.id}</td>
+                            <td>{user?.name}</td>
+                            <td>{user?.email}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div >
     );
 }

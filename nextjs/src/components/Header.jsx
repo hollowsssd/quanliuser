@@ -4,7 +4,7 @@ export const Header = () => {
             <header>
                 <div className="navbar bg-base-100">
                     <div className="flex-1">
-                        <a className="btn btn-ghost text-xl">QuanliUser</a>
+                        <a className="btn btn-ghost text-xl" href="/">User Management</a>
                     </div>
                     <div className="flex-none gap-2">
                         <div className="form-control">
@@ -15,7 +15,7 @@ export const Header = () => {
                                 <div className="w-10 rounded-full">
                                     <img
                                         alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                        src="https://i.pinimg.com/736x/f8/16/c9/f816c9a2846546a3b2a70e0bdfdd8e20.jpg" />
                                 </div>
                             </div>
                             <ul

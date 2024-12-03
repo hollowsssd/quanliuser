@@ -5,7 +5,7 @@ import { url } from 'inspector';
 export const middleware = async (request) => {
     const pathname = request.nextUrl.pathname;
     const token = request.cookies.get("token")?.value;
-    console.log(token);
+    // console.log(token);
 
     // Kiểm tra nếu không có token và người dùng không đang ở trang login
     if (!token && pathname !== "/login") {
@@ -15,7 +15,7 @@ export const middleware = async (request) => {
     // Nếu có token, xác thực token
     if (token) {
         const { success, user } = await getProfile(token);
-        console.log("Profile fetched:", { success, user });
+        // console.log("Profile fetched:", { success, user });
         // Nếu token không hợp lệ, chuyển hướng về trang login
         if (!success) {
             return NextResponse.redirect(new URL("/login", request.url));
