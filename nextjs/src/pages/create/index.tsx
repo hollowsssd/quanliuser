@@ -9,7 +9,8 @@ const CreateUserPage = () => {
     const [userField, setUserField] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        image: null as File | null,
     });
 
     const changeUserFieldHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,11 +19,27 @@ const CreateUserPage = () => {
             [e.target.name]: e.target.value
         });
     };
+    const changeFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setUserField({
+                ...userField,
+                image: e.target.files[0], // Gán tệp
+            });
+        }
+    };
 
     const onSubmitChange = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/addnew", userField);
+            const formData=new FormData();
+            formData.append("name",userField.name);
+            formData.append("email",userField.email);
+            formData.append("password",userField.password);
+            if (userField.image) {
+                formData.append("image",userField.image);
+            }
+
+            const response = await axios.post("http://127.0.0.1:8000/api/addnew", formData);
             console.log(response);
             window.location.href = '/';
         } catch (err) {
@@ -99,7 +116,18 @@ const CreateUserPage = () => {
                                 />
                             </label>
                         </div>
-                        <button type="submit" className="btn btn-outline btn-success" onClick={e => onSubmitChange}>
+                        <div>
+                            <label className="form-control w-full max-w-xs">
+                                <div className="label">
+                                    <span className="label-text">Pick a Avatar</span>
+                                </div>
+                                <input type="file" className="file-input file-input-bordered w-full max-w-xs"
+                                    onChange={changeFileHandler} />
+                                <div className="label">
+                                </div>
+                            </label>
+                        </div>
+                        <button type="submit" className="btn btn-outline btn-success">
                             Add User
                         </button>
                     </form>

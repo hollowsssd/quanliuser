@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserStoreRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
  
 class UserController extends Controller
 {
@@ -22,16 +24,21 @@ class UserController extends Controller
     {
         try {
             // Create User
+            $imageName = Str::random(32) . "." . $request->image->getClientOriginalExtension();
+             
+            Storage::disk('public')->put($imageName, file_get_contents($request->image));
             User::create([
                 'id' => $request->id,
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password
+                'password' => $request->password,
+                'image' => $imageName,
+                      
             ]);
  
             // Return Json Response
             return response()->json([
-                'message' => "User successfully created."
+                'message' => "User successfully created. '$request->name'-- '$imageName'"
             ], 200);
         } catch (\Exception $e) {
             // Return Json Response
@@ -68,9 +75,27 @@ class UserController extends Controller
                 ], 404);
             }
  
-            //echo "request : $request->image";
+            // echo "request : $request->image";
             $users->name = $request->name;
             $users->email = $request->email;
+
+            if ($request->image) {
+ 
+                // Public storage
+                $storage = Storage::disk('public');
+ 
+                // Old iamge delete
+                if ($storage->exists($users->image))
+                    $storage->delete($users->image);
+ 
+                // Image name
+                $imageName = Str::random(32) . "." . $request->image->getClientOriginalExtension();
+                $users->image = $imageName;
+ 
+                // Image save in public folder
+                $storage->put($imageName, file_get_contents($request->image));
+            }
+
  
             // Update User
             $users->save();

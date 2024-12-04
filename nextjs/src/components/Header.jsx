@@ -15,7 +15,6 @@ export const Header = () => {
             router.push("/login");
             return;
         }
-
         try {
             // Gọi API logout
             const response = await axios.post(
@@ -27,10 +26,8 @@ export const Header = () => {
                     },
                 }
             );
-
             Cookies.remove("token");
             router.push("/login");
-
         } catch (err) {
             console.error("Logout failed:", err);
             // Nếu có lỗi xảy ra, vẫn chuyển hướng về trang login

@@ -6,11 +6,15 @@ import Link from "next/link";
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router';
 import { Header } from "@/components/Header";
+import Users from '@/components/tabledata';
 
 interface User {
     id: number;
     name: string;
-    email: string
+    email: string;
+    created_at: string;
+    image?: string;
+
 }
 
 export default function ViewUserPage() {
@@ -45,6 +49,8 @@ export default function ViewUserPage() {
                             <th>ID</th>
                             <th>Full Name</th>
                             <th>Email</th>
+                            <th>Created At</th>
+                            <th>Avatar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +58,15 @@ export default function ViewUserPage() {
                             <td>{user?.id}</td>
                             <td>{user?.name}</td>
                             <td>{user?.email}</td>
+                            <td>{user?.created_at}</td>
+                            <td><div className="avatar">
+                                <div className="w-24 rounded-full">
+                                    <img
+                                        src={`http://127.0.0.1:8000/storage/${user?.image}`}
+                                        alt='No Avatar'
+                                    />
+                                </div>
+                            </div></td>
                         </tr>
                     </tbody>
                 </table>

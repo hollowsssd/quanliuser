@@ -37,7 +37,7 @@ export default function Users() {
             <th className="py-3 px-6">#</th>
             <th className="py-3 px-6">Name</th>
             <th className="py-3 px-6">Email</th>
-            <th className="py-3 px-6">Created At</th>
+            
             <th className="py-3 px-6 text-center">Actions</th>
             </tr>
         </thead>
@@ -47,7 +47,6 @@ export default function Users() {
                 <td className="py-3 px-6">{index + 1}</td>
                 <td className="py-3 px-6">{rs.name}</td>
                 <td className="py-3 px-6">{rs.email}</td>
-                <td className="py-3 px-6">{rs.created_at}</td>
                 <td className="flex justify-center gap-1 py-3">
                     <Link
                     href={`view/${rs.id}`} 

@@ -25,13 +25,15 @@ class UserStoreRequest extends FormRequest
             return [
                 'name' => 'required|string|max:358',
                 'email' => 'required|string',
-                'password' => 'required|string'
+                'password' => 'required|string',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ];
         } else {
             return [
                 'name' => 'required|string|max:358',
                 'email' => 'required|string',
-                'password' => 'required|string'
+                'password' => 'required|string',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ];
         }
     }
@@ -42,12 +44,15 @@ class UserStoreRequest extends FormRequest
                 'name.required' => 'name is required !',
                 'email.required' => 'email is required !',
                 'password.required' => 'password is required !',
+                'image.required' => 'image is required !',
+
             ];
         } else {
             return [
                 'name.required' => 'name is required !',
                 'email.required' => 'email is required !',
                 'password.required' => 'password is required !',
+                'image.required' => 'image is required !',
             ];
         }
     }
