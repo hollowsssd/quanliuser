@@ -33,7 +33,7 @@ const CreateUserPage = () => {
                 httpOnly: false, // httpOnly chỉ có tác dụng khi set từ phía server
                 maxAge: 86400, // Thời gian tồn tại tính bằng giây
             });
-            // window.location.href = '/';
+            window.location.href = '/';
 
                 } catch (err) {
             console.log("Something Wrong");

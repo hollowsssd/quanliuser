@@ -38,9 +38,10 @@ const CreateUserPage = () => {
             if (userField.image) {
                 formData.append("image",userField.image);
             }
+        
 
             const response = await axios.post("http://127.0.0.1:8000/api/addnew", formData);
-            console.log(response);
+            // console.log(response);
             window.location.href = '/';
         } catch (err) {
             console.log("Something Wrong");

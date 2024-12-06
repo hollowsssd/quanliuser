@@ -50,21 +50,24 @@ export default function ViewUserPage() {
         }
     };
 
-   
+
     const onSubmitChange = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Ngừng hành vi mặc định của form (reload trang)
+        e.preventDefault(); // Ngừng hành vi mặc định của form (reload)
+
         try {
             const formData = new FormData();
             formData.append("name", userField.name);
             formData.append("email", userField.email);
             formData.append("password", userField.password);
-            formData.append("_method", 'PUT');
             if (userField.image) {
                 formData.append("image", userField.image);
             }
-            else if(userField.image){formData.append("image", userField.image);}
-
-            const response=await axios.post(`http://127.0.0.1:8000/api/usersupdate/${id}`, formData);
+            formData.append("_method", 'PUT');
+            console.log("FormData entries:", Array.from(formData.entries()));
+            const response = await axios.post(`http://127.0.0.1:8000/api/usersupdate/${id}`, formData, {
+                headers: { 'Content-Type': "multipart/form-data" },
+            });
+            // console.log(response.data); 
             router.push('/'); // Sau khi cập nhật xong, chuyển hướng về trang chủ
         } catch (err) {
             console.log("Something went wrong while updating user.");
