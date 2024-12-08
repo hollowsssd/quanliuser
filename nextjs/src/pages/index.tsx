@@ -30,7 +30,7 @@ export default function Home() {
           <Link
             href="/create"
             className="btn btn-primary">
-            Create
+            Create NewUser
           </Link>
         </div>
         <Suspense fallback={<Spinner />}>

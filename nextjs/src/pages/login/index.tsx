@@ -25,7 +25,10 @@ const CreateUserPage = () => {
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/auth/login", userField);
             console.log(response);
-            console.log(response.data.token);
+
+            // console.log(response.data.token);
+            // const {token}= response.data.token;
+            
             const cookies = new Cookies();
             cookies.set("token", response.data.token, {
                 path: "/",
@@ -33,10 +36,27 @@ const CreateUserPage = () => {
                 httpOnly: false, // httpOnly chỉ có tác dụng khi set từ phía server
                 maxAge: 86400, // Thời gian tồn tại tính bằng giây
             });
+            const username= await axios.get(`http://127.0.0.1:8000/api/auth/profile`,{
+                headers:{
+                    Authorization: `Bearer ${response.data.token}`,
+                },
+            })
+
+            // console.log(username.data.user);
+            const user= username.data.user;
+            // console.log(user.name); 
+            if (user) {
+                localStorage.setItem('name',user.name);
+                localStorage.setItem('image',user.image);
+            }
+
+
+
             window.location.href = '/';
 
                 } catch (err) {
             console.log("Something Wrong");
+
         }
     };
     

@@ -14,6 +14,7 @@ Route::get('users/{id}', [UserController::class, 'show']);
 Route::post('addnew', [UserController::class, 'store']);
 Route::put('usersupdate/{id}', [UserController::class, 'update']);
 Route::delete('usersdelete/{id}', [UserController::class, 'destroy']);
+Route::get('users/search', [UserController::class, 'search']);
 
 Route::post('auth/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/auth/logout', [AuthController::class, 'logout']);
