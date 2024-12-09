@@ -35,8 +35,12 @@ const CreateUserPage = () => {
             formData.append("name",userField.name);
             formData.append("email",userField.email);
             formData.append("password",userField.password);
-            
-            const response = await axios.post("http://127.0.0.1:8000/api/addnew", formData);
+            if (userField.image) {
+                formData.append("image", userField.image);
+            }            
+            console.log(userField);
+
+             await axios.post("http://127.0.0.1:8000/api/addnew", formData);
             // console.log(response);
             window.location.href = '/';
         } catch (err) {
