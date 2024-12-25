@@ -114,7 +114,7 @@ const CreateUserPage = () => {
                                     id="password"
                                     placeholder="Password..."
                                     onChange={changeUserFieldHandler}
-                                />
+                                /> 
                             </label>
                         </div>
                         <div>

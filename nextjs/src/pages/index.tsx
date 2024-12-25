@@ -21,24 +21,24 @@ export default function Home() {
   return (
     <div>
       <Header />
-    <div className="w-screen py-20 flex justify-center flex-col items-center">
-    <div className="flex items-center justify-between gap-1 mb-5">
-      <h1 className="text-4xl font-bold">Create Read Update and Delete Users</h1>
-    </div>    
-      <div className="overflow-x-auto">
-        <div className="mb-2 w-full text-right">
-          <Link
-            href="/create"
-            className="btn btn-primary">
-            Create NewUser
-          </Link>
+      <div className="w-screen py-20 flex justify-center flex-col items-center">
+        <div className="flex items-center justify-between gap-1 mb-5">
+          <h1 className="text-4xl font-bold">Create Read Update and Delete Users</h1>
         </div>
-        <Suspense fallback={<Spinner />}>
-          <TableData/>
-        </Suspense>
-    </div>  
-  </div>
-  </div>
-    
+        <div className="overflow-x-auto">
+          <div className="mb-2 w-full text-right">
+            <Link
+              href="/create"
+              className="btn btn-primary">
+              Create NewUser
+            </Link>
+          </div>
+          <Suspense fallback={<Spinner />}>
+            <TableData />
+          </Suspense>
+        </div>
+      </div>
+    </div>
+
   );
 }

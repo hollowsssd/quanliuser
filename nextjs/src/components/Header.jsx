@@ -45,7 +45,7 @@ export const Header = () => {
             router.push("/login");
         }
     };
-
+    
     return (
         <div>
             <header>
@@ -73,7 +73,7 @@ export const Header = () => {
                         </ul>
                     </div>
                 </div>
-        
+
             </header >
         </div >
     );
